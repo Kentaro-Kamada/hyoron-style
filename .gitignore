@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .textlintrc
 prh.yml
 jpa-style.aux
@@ -11,3 +12,9 @@ jpa-style.run.xml
 jpa-style.synctex.gz
 jpa-style.toc
 .DS_Store
+=======
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+>>>>>>> 7fb561b (first commit)
