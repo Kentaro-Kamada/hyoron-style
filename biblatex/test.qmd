@@ -1,0 +1,75 @@
+---
+format: pdf
+pdf-engine: lualatex
+documentclass: ltjarticle
+classoption: [a4paper]
+cite-method: biblatex
+biblatexoptions: [backend=biber, style=jpa, sorting=nyt]
+bibliography: reference.bib
+biblio-title: "引用文献"
+---
+
+
+# 欧文の文献
+
+
+## 単著の本
+
+\fullcite{Broadbent1998}
+
+
+
+## 共著の本
+
+\fullcite{Berger1972}
+
+
+## 編書
+
+- 編者がひとり
+
+\fullcite{Douglas1970}
+
+
+- 編者が複数
+
+\fullcite{Rubington1965}
+
+
+## 編書論文
+
+
+\fullcite{Mayer1995}
+
+
+## 雑誌論文
+
+
+\fullcite{Abbott1995}
+
+# 邦文の文献
+
+## 単著の本
+
+\fullcite{oguma1995}
+
+## 共著の本
+
+\fullcite{miyajima1985}
+
+## 編書
+
+
+\fullcite{kosaka1998}
+
+
+## 編書論文
+
+\fullcite{Chuankyo1998}
+
+
+
+## 雑誌論文
+
+\fullcite{sato1998}
+
