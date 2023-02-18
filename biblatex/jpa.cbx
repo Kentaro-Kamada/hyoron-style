@@ -47,8 +47,8 @@
     \renewcommand*{\finalnamedelim}{\printtext{・}}%
     % 最後の著者名の表示前の区切り：中黒（・）
     \renewcommand*{\multinamedelim}{\printtext{・}}%
-    % 3名以上の共著で著者名を省略する場合：「他」
-    \renewcommand*{\andothersdelim}{他}%
+    % 3名以上の共著で著者名を省略する場合：「ほか」
+    \renewcommand*{\andothersdelim}{ほか}%
     % 姓と名の区切り
     \renewcommand{\revsdnamepunct}{\space}%
     % 余分な and を抑制
@@ -97,7 +97,7 @@
   \usebibmacro{name:andothers}%
 }
 
-%% 曖昧さ回避の場合の「他」の前のコンマを削除
+%% 曖昧さ回避の場合の「ほか」の前のコンマを削除
 \renewbibmacro*{name:andothers}{%
   \ifthenelse{\equal{\value{listcount}}{\value{liststop}}\AND\ifmorenames}{%
     \ifthenelse{\boolean{japanese}}{}{%  
