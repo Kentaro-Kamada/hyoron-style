@@ -35,7 +35,7 @@
 
 % 引用ごとに言語を判断して処理
 \AtEveryCitekey{%
-  \ifthenelse{\equal{\thefirstlistitem{language}}{japanese}}{%
+  \iffieldequalstr{langid}{japanese}{%
       \setboolean{japanese}{true}%
     }{%
       \setboolean{japanese}{false}%

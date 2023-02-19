@@ -43,15 +43,13 @@ useorigauthor=true,
 
 % 日本語文献かどうかをチェックして区切り文字を置き換える
 \AtEveryBibitem{
-  \iflistundef{language}{}{%
-  \ifthenelse{\equal{\thefirstlistitem{language}}{japanese}}{%
+  \iffieldequalstr{langid}{japanese}{%
     \setboolean{japanese}{true}%
     \renewcommand*{\newunitpunct}{}%
     \renewcommand*{\finentrypunct}{}%
     \renewcommand*{\multinamedelim}{・}%
     \renewcommand*{\revsdnamepunct}{\addspace}%
     }{}%
-  }%
 }
 
 \DeclareDelimFormat[bib,biblist]{finalnamedelim}{%
@@ -602,17 +600,13 @@ useorigauthor=true,
 \newbibmacro*{related:translationof}[1]{%
   \entrydata*{#1}{%
     \renewcommand*{\relatedpunct}{}%
-    \iffieldundef{language}{%
-      \setboolean{japanese}{false}%
-    }{
-      \ifthenelse{\equal{\thefirstlistitem{language}}{japanese}}{
+      \iffieldequalstr{langid}{japanese}{%
         \setboolean{japanese}{true}
       }{%
         \setboolean{japanese}{false}
       }
     }%
     \usedriver{}{book}%
-  }%
 }
 
 %%% 翻訳書（日本語訳）%%%
@@ -672,7 +666,7 @@ useorigauthor=true,
 \newbibmacro*{related:mvbook}[1]{%
   \entrydata*{#1}{%
     \renewcommand*{\relatedpunct}{}%
-    \ifthenelse{\equal{\thefirstlistitem{language}}{japanese}}{
+    \iffieldeaualstr{langid}{japanese}{
       \setboolean{japanese}{true}
     }{%
       \setboolean{japanese}{false}
