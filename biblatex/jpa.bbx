@@ -217,13 +217,13 @@ useorigauthor=true,
 \newbibmacro*{ed-eds:author}{%
   \ifthenelse{\boolean{japanese}}{%
     \iffieldequalstr{authortype}{editor}{
-      \printtext[parens]{編}}{%
-      \printfield[parens]{authortype}}%
+      \printtext{編}}{%
+      \printfield{authortype}}%
   }{%
     \ifthenelse{\value{author}>1}{%
-      \addspace\printtext[parens]{Eds.}%
+      \addspace\printtext{eds.}%
     }{%
-      \addspace\printtext[parens]{Ed.}%
+      \addspace\printtext{ed.}%
     }%
   }
 }
@@ -232,15 +232,15 @@ useorigauthor=true,
 \newbibmacro*{ed-eds:editor}{%
   \ifthenelse{\boolean{japanese}}{%
     \iffieldequalstr{editortype}{editor}{
-      \printtext[parens]{編}}{%
+      \printtext{編}}{%
       \iffieldundef{editortype}{%
-        \printtext[parens]{編}}{%
-        \printfield[parens]{editortype}}}%
+        \printtext{編}}{%
+        \printfield{editortype}}}%
   }{%
     \ifthenelse{\value{editor}>1}{%
-      \addspace\printtext[parens]{Eds.}%
+      \addspace\printtext{eds.}%
     }{%
-      \addspace\printtext[parens]{Ed.}%
+      \addspace\printtext{ed.}%
     }%
   }
 }
@@ -248,15 +248,15 @@ useorigauthor=true,
 \newbibmacro*{ed-eds:editora}{%
   \ifthenelse{\boolean{japanese}}{%
     \iffieldequalstr{editoratype}{editor}{
-      \printtext[parens]{編}}{%
+      \printtext{編}}{%
       \iffieldundef{editoratype}{%
-        \printtext[parens]{編}}{%
-        \printfield[parens]{editoratype}}}%
+        \printtext{編}}{%
+        \printfield{editoratype}}}%
   }{%
     \ifthenelse{\value{editor}>1}{%
-      \addspace\printtext[parens]{Eds.}%
+      \addspace\printtext{eds.}%
     }{%
-      \addspace\printtext[parens]{Ed.}%
+      \addspace\printtext{ed.}%
     }%
   }
 }
@@ -265,12 +265,12 @@ useorigauthor=true,
 \newbibmacro*{translatortype}{
   \ifthenelse{\boolean{japanese}}{%
     \iffieldundef{translatortype}{%
-      \printtext[parens]{訳}}{%
-      \printfield[parens]{translatortype}%
+      \printtext{訳}}{%
+      \printfield{translatortype}%
     }%
   }{%
     \iffieldundef{translatortype}{%
-    \printfield{translatortype}\printtext{Trans.}}{%
+    \printfield{translatortype}\printtext{trans.}}{%
       \printfield{translatortype}%
     }%
   }%
@@ -279,12 +279,12 @@ useorigauthor=true,
 \newbibmacro*{translatoratype}{
   \ifthenelse{\boolean{japanese}}{%
     \iffieldundef{translatoratype}{%
-      \printtext[parens]{訳}}{%
-      \printfield[parens]{translatoratype}%
+      \printtext{訳}}{%
+      \printfield{translatoratype}%
     }%
   }{%
     \iffieldundef{translatoratype}{%
-    \printfield{translatoratype}\printtext{Trans.}}{%
+    \printfield{translatoratype}\printtext{trans.}}{%
       \printfield{translatoratype}%
     }%
   }%
@@ -294,7 +294,7 @@ useorigauthor=true,
 % %%% 翻訳者がeditorに入力されている場合 %%%
 % \newbibmacro*{translation:editortype}{
 %   \ifthenelse{\boolean{japanese}}{%
-%       \printfield[parens]{editortype}\addspace\space%
+%       \printfield{editortype}\addspace\space%
 %   }{%
 %       \printfield{editortype}\addspace%
 %   }%
@@ -658,7 +658,7 @@ useorigauthor=true,
   \printlist{publisher}%
   \setunit{\addperiod\space}%
   \entrydata*{\thefield{related}}{%
-    \printtext[parens]{Original work published \printdate}%
+    \printtext{Original work published \printdate}%
   }
 }
 
@@ -682,13 +682,13 @@ useorigauthor=true,
   \ifnameundef{author}{}{%
     \printnames{author}%
     \usebibmacro{ed-eds:author}%
-    \printtext[parens]{\printdateextra}%
+    \printtext{\printdateextra}%
     \setunit{\adddot\addspace}}%
   % 編集者名
   \ifnameundef{editor}{}{%
     \printnames{editor}%
     \usebibmacro{ed-eds:editor}%
-    \printtext[parens]{\printdateextra}%
+    \printtext{\printdateextra}%
     \setunit{\adddot\addspace}}%
   % 表題
   \printfield{title}%
@@ -924,7 +924,7 @@ useorigauthor=true,
   % 誌名
   \iffieldundef{journaltitle}{}{\printfield{journaltitle}\addcomma\space}%
   % 巻号
-  \iffieldundef{volume}{}{\printfield[emph]{volume}}%
+  \iffieldundef{volume}{}{\printfield{volume}}%
   \iffieldundef{number}{}{\printfield[parens]{number}\addjspace}%
   % 出版社
   \renewcommand*{\finentrypunct}{}%
