@@ -15,11 +15,14 @@ biblio-title: "引用文献"
 
 ## 単著の本
 
+@Broadbent1998 はこう述べている[@Broadbent1998]。
+
 \fullcite{Broadbent1998}
 
 
-
 ## 共著の本
+
+@Berger1972 はこう述べている[@Berger1972]。
 
 \fullcite{Berger1972}
 
@@ -28,10 +31,14 @@ biblio-title: "引用文献"
 
 - 編者がひとり
 
+@Douglas1970 はこう述べている[@Douglas1970]。
+
 \fullcite{Douglas1970}
 
 
 - 編者が複数
+
+@Rubington1965 はこう述べている[@Rubington1965]。
 
 \fullcite{Rubington1965}
 
@@ -39,11 +46,15 @@ biblio-title: "引用文献"
 ## 編書論文
 
 
+@Mayer1995 はこう述べている[@Mayer1995]。
+
 \fullcite{Mayer1995}
 
 
 ## 雑誌論文
 
+
+@Abbott1995 はこう述べている[@Abbott1995]。
 
 \fullcite{Abbott1995}
 
@@ -51,25 +62,34 @@ biblio-title: "引用文献"
 
 ## 単著の本
 
+@oguma1995 はこう述べている[@oguma1995]。
+
 \fullcite{oguma1995}
 
 ## 共著の本
+
+@miyajima1985 はこう述べている[@miyajima1985]。
 
 \fullcite{miyajima1985}
 
 ## 編書
 
+@kosaka1998 はこう述べている[@kosaka1998]。
 
 \fullcite{kosaka1998}
 
 
 ## 編書論文
 
+@Chuankyo1998 はこう述べている[@Chuankyo1998]。
+
 \fullcite{Chuankyo1998}
 
 
 
 ## 雑誌論文
+
+@sato1998 はこう述べている[@sato1998]。
 
 \fullcite{sato1998}
 
