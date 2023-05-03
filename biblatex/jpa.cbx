@@ -9,7 +9,7 @@
 % 著者名と出版年の区切りは半角スペース
 \DeclareDelimFormat{nameyeardelim}{\space}
 
-% 
+% 複数の文献を引用するときは「; 」で区切る
 %\DeclareDelimFormat{multicitedelim}{\addsemicolon\space}
 
 % citesコマンドの区切り文字（文書全体で変更）
@@ -43,9 +43,9 @@
   \ifthenelse{\boolean{japanese}}{%
     % 日本語文献用の設定
     %
-    % 著者名の区切り文字：中黒（・）
-    \renewcommand*{\finalnamedelim}{\printtext{・}}%
     % 最後の著者名の表示前の区切り：中黒（・）
+    \renewcommand*{\finalnamedelim}{\printtext{・}}%
+    % 著者名の区切り文字：中黒（・）（最大2人なのであんまり意味ない気がする）
     \renewcommand*{\multinamedelim}{\printtext{・}}%
     % 3名以上の共著で著者名を省略する場合：「ほか」
     \renewcommand*{\andothersdelim}{ほか}%

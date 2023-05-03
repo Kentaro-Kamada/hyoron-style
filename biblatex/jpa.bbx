@@ -353,10 +353,12 @@ useorigauthor=true,
 
 %%% 書籍タイトル %%%
 \DeclareFieldFormat[book,mvbook,online,thesis,inproceedings,incollection]{title}{% 外国語のタイトルは強調
-  \ifthenelse{\boolean{japanese}}{#1}{\emph{#1}}}
+  \ifthenelse{\boolean{japanese}}{『#1』}{\emph{#1}}}
 
 %%% 論文タイトル %%%
-\DeclareFieldFormat[article,report,misc,inbook]{title}{#1}
+\DeclareFieldFormat[article,report,misc,inbook]{title}{
+  \ifthenelse{\boolean{japanese}}{「#1」}{``#1''}}
+
 
 %%% 書籍サブタイトル %%%
 \DeclareFieldFormat[book,mvbook,online,thesis,inproceedings,incollection]{subtitle}{%
@@ -387,13 +389,13 @@ useorigauthor=true,
 
 %%% 雑誌名 %%%
 \DeclareFieldFormat[article,misc]{journaltitle}{%
-  \ifthenelse{\boolean{japanese}}{#1}{%
+  \ifthenelse{\boolean{japanese}}{『#1』}{%
     \emph{#1}%
   }%
 }%
 
 %%% 大会発表論文集，Proceedings %%%
-\DeclareFieldFormat[inproceedings]{booktitle}{#1}
+\DeclareFieldFormat[inproceedings]{booktitle}{「#1」}
 
 %%% inbookにおける書籍情報の処理 %%%
 \newbibmacro{bookinfo}{%
