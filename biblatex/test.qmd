@@ -22,10 +22,17 @@ biblio-title: "引用文献"
 
 ## 共著の本
 
+- 著者がふたり
+
 @Berger1972 はこう述べている[@Berger1972]。
 
 \fullcite{Berger1972}
 
+- 著者が3人以上
+
+@Isaac1980 はこう述べている[@Isaac1980]。
+
+\fullcite{Isaac1980}
 
 ## 編書
 
@@ -41,6 +48,7 @@ biblio-title: "引用文献"
 @Rubington1965 はこう述べている[@Rubington1965]。
 
 \fullcite{Rubington1965}
+
 
 
 ## 編書論文
