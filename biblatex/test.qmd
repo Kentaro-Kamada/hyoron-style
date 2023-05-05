@@ -101,3 +101,9 @@ biblio-title: "引用文献"
 
 \fullcite{sato1998}
 
+
+## 学位論文
+
+\fullcite{ueno2013}
+
+
