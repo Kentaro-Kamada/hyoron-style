@@ -116,22 +116,22 @@ useorigauthor=true,
 \DeclareNameAlias{translatora}{default}
 \DeclareNameAlias{origauthor}{default}
 
-
-%%% ファーストネーム（イニシャル），ファミリーネームの順（どこで使用？上と被ってる？）
-\DeclareNameFormat{given-family}{%
+% 英語のincollectionのeditorのみ、先頭編者もgiven-family
+\DeclareNameFormat[incollection]{editor}{
   \ifthenelse{\boolean{japanese}}{%
-    % family-givenの順で並べて、最後の著者以外は後ろに「・」を置く（著者がひとりは最後の著者としてあつかう）
+    %日本語
+    \ifthenelse{\value{listcount}=1}{}{
+      \printtext{・}
+    }%
     \namepartfamily%
     \namepartgiven%
-    \ifthenelse{\value{listcount}=\value{listtotal}}{}{\printtext{・}}%
   }{%
-    \ifthenelse{\value{listcount}<\value{listtotal}}{}{%
-      \usebibmacro{name:given-family}%
-      {\namepartfamily}%
-      {\namepartgiveni}%
-      {\namepartprefix}%
-      {\namepartsuffix}%
-    }%
+    % 英語
+    \usebibmacro{name:given-family}%
+    {\namepartfamily}%
+    {\namepartgiven}%
+    {\namepartprefix}%
+    {\namepartsuffix}%
   }%
 }
 
@@ -162,34 +162,8 @@ useorigauthor=true,
   \printdateextra
 }
 
-
-%%% 編集者名 %%%
-\renewbibmacro*{editor}{%
-  \printnames{editor}%
-  \usebibmacro{ed-eds:editor}%
-  \ifnameundef{editora}{}{
-    \printnames{editora}%
-    \usebibmacro{ed-eds:editora}%
-  }%
-  \adddot\space%
-}
-
-%%% 著者のタイプ %%%
-\newbibmacro*{ed-eds:author}{%
-  \ifthenelse{\boolean{japanese}}{%
-    \iffieldequalstr{authortype}{editor}{
-      \printtext{編}}{%
-      \printfield{authortype}}%
-  }{%
-    \ifthenelse{\value{author}>1}{%
-      \addnbspace\printtext{eds.}%
-    }{%
-      \addnbspace\printtext{ed.}%
-    }%
-  }
-}
-
-%%% 編集者のタイプ %%%
+%%% 編集者 %%%
+% 「編」とか「ed.」「eds.」とか
 \newbibmacro*{ed-eds:editor}{%
   \ifthenelse{\boolean{japanese}}{%
     \iffieldequalstr{editortype}{editor}{
@@ -199,11 +173,28 @@ useorigauthor=true,
         \printfield{editortype}}}%
   }{%
     \ifthenelse{\value{editor}>1}{%
-      \addnbspace\printtext{eds.}%
+      \addspace\printtext{eds}\adddot%
     }{%
-      \addnbspace\printtext{ed.}%
+      \addspace\printtext{ed}\adddot%
     }%
   }
+}
+
+%%% 編集者名 %%%
+\renewbibmacro*{editor}{%
+  \printnames{editor}%
+  \usebibmacro{ed-eds:editor}%
+  \ifnameundef{editora}{}{
+    \printnames{editora}%
+    \usebibmacro{ed-eds:editora}%
+  }%
+}
+
+
+%%% 編集者名+出版年 %%%
+\newbibmacro{editor+year}{%
+  \usebibmacro{editor}
+  \printdateextra
 }
 
 
@@ -236,12 +227,6 @@ useorigauthor=true,
   }%
 }
 
-
-%%% 編集者名+出版年 %%%
-\newbibmacro{editor+year}{%
-  \usebibmacro{editor}
-  \printdateextra
-}
 
 %%% 翻訳者
 \renewbibmacro*{translator}{%
@@ -467,10 +452,10 @@ useorigauthor=true,
   \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
   % 特定章名
   \printfield{title}%
-  \ifthenelse{\boolean{japanese}}{\unspace}{\setunit*{\addspace}}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace}}{\setunit*{\addspace}}
   % 編集者
   \usebibmacro{ineditor}
-  \ifthenelse{\boolean{japanese}}{\unspace}{\setunit*{\addcomma\space}}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace}}{\setunit*{\addcomma\space}}
   % 書籍名
   \printfield{booktitle}
   \ifthenelse{\boolean{japanese}}{\setunit*{\unspace}}{\setunit*{\addcomma\space}}
