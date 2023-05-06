@@ -42,23 +42,22 @@ useorigauthor=true,
 \setboolean{japanese}{false}
 
 % unitpuntcを「. 」から「, 」に変更
-\renewcommand{\newunitpunct}{\addcomma\addnbspace}
+% \renewcommand{\newunitpunct}{\addcomma\addnbspace}
 
 % 日本語文献かどうかをチェックして区切り文字を置き換える
 \AtEveryBibitem{
   \iffieldequalstr{langid}{japanese}{%
     \setboolean{japanese}{true}%
-    \renewcommand*{\newunitpunct}{}%
     % 文献末尾：英語「.」日本語：「．」
     \renewcommand*{\finentrypunct}{．}%
     \renewcommand*{\multinamedelim}{・}%
-    \renewcommand*{\revsdnamepunct}{\addnbspace}%
+    \renewcommand*{\revsdnamepunct}{\addspace}%
     }{}%
 }
 
 % 複数の著者などの一番最後の著者の前の区切り文字
 \DeclareDelimFormat[bib,biblist]{finalnamedelim}{%
-  \ifthenelse{\boolean{japanese}}{・}{\addnbspace\&}
+  \ifthenelse{\boolean{japanese}}{・}{\addspace\&}
 }
 
 
@@ -357,7 +356,8 @@ useorigauthor=true,
 
 
 %%% ページ番号 %%%
-\DeclareFieldFormat{pages}{#1}
+% \mkcomprangeで重複している位の数字を省略（）
+\DeclareFieldFormat{pages}{\mkcomprange{#1}}
 
 
 %%% doi %%%
