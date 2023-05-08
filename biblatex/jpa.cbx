@@ -204,4 +204,46 @@
 }
 
 
+%%% authoryear-compからDeclareCiteCommandの部分をコピペして、半角カッコを全角カッコに修正　%%%
+% authoryear-compのコード：https://ftp.kddilabs.jp/CTAN/macros/latex/contrib/biblatex/latex/cbx/authoryear-comp.cbx
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibparens]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{citeyear}}
+  {}
+  {\usebibmacro{postnote}}
+
+
+\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {}
+  {\usebibmacro{postnote}}
+
+
+\DeclareMultiCiteCommand{\parencites}[\mkbibparens]{\parencite}
+  {\setunit{\multicitedelim}}
+
+\DeclareMultiCiteCommand{\footcites}[\mkbibfootnote]{\footcite}
+  {\setunit{\multicitedelim}}
+
+
+\DeclareMultiCiteCommand{\smartcites}[\iffootnote\mkbibparens\mkbibfootnote]
+  {\smartcite}{\setunit{\multicitedelim}}
+
+
+
+
 \endinput
