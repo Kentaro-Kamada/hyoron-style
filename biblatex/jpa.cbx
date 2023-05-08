@@ -121,17 +121,19 @@
 
 \DeclareNameAlias{translator}{labelname}
 \DeclareNameAlias{origauthor}{labelname}
-   
+
+
 
 \renewbibmacro*{textcite}{%
   % 同じ著者の引用が複数続く場合は区切り文字と出版年のみを表示
   \iffieldequals{namehash}{\cbx@lasthash}{%
     \setunit{\compcitedelim}%
-    \usebibmacro{cite:plabelyear+extradate}}{%
+    \usebibmacro{cite:plabelyear+extradate}
+  }{%
     % 引用開始
     \ifbool{cbx:parens}
-       {\bibcloseparen\global\boolfalse{cbx:parens}}
-       {}%
+      {\unspace\printtext{）}\global\boolfalse{cbx:parens}}
+      {}%
     \setunit{\textcitedelim}%
     % 著者名 日本語訳の書籍の場合は，原著者の名前を原語表記
     \ifnameundef{origauthor}{%
@@ -143,18 +145,37 @@
     }%
     % 著者名と出版年の区切り
     \setunit{\global\booltrue{cbx:parens}%
-             \printdelim{nameyeardelim}%
-             \bibopenparen}%
+      \printdelim{nameyeardelim}%
+      \unspace
+      \printtext{（}
+    }%
     % 「prenote」の処理
-      \ifnumequal{\value{citecount}}{1}
-          {\usebibmacro{prenote}}
-          {}%
+    \ifnumequal{\value{citecount}}{1}
+    {\usebibmacro{prenote}}
+    {}%
     % 出版年
     \usebibmacro{cite:plabelyear+extradate}%
     % 著者名ハッシュの一時保存
     \savefield{namehash}{\cbx@lasthash}%
-    \stepcounter{textcitecount}}%
+    \stepcounter{textcitecount}
+  }%
 }
+
+% authoryear-compからコピペして修正（半角カッコ→全角カッコ）
+\renewbibmacro*{textcite:postnote}{%
+  \usebibmacro{postnote}%
+  \ifthenelse{\value{multicitecount}=\value{multicitetotal}}
+    {\setunit{}%
+     \printtext{%
+       \ifbool{cbx:parens}
+         {\unspace\printtext{）}\global\boolfalse{cbx:parens}}
+         {}}}
+    {\setunit{%
+       \ifbool{cbx:parens}
+         {\unspace\printtext{）}\global\boolfalse{cbx:parens}}
+         {}%
+       \textcitedelim}}}
+
 
 
 \renewbibmacro*{cite}{%
@@ -207,7 +228,11 @@
 %%% authoryear-compからDeclareCiteCommandの部分をコピペして、半角カッコを全角カッコに修正　%%%
 % authoryear-compのコード：https://ftp.kddilabs.jp/CTAN/macros/latex/contrib/biblatex/latex/cbx/authoryear-comp.cbx
 
-\DeclareCiteCommand{\parencite}[\mkbibparens]
+%%% （neko 1984）のような引用
+% 全角括弧で挟むコマンド
+\newcommand{\mkfullwidthparens}[1]{\printtext{（#1）}}
+
+\DeclareCiteCommand{\parencite}[\mkfullwidthparens]
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -215,7 +240,7 @@
   {}
   {\usebibmacro{postnote}}
 
-\DeclareCiteCommand*{\parencite}[\mkbibparens]
+\DeclareCiteCommand*{\parencite}[\mkfullwidthparens]
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -224,7 +249,7 @@
   {\usebibmacro{postnote}}
 
 
-\DeclareCiteCommand{\smartcite}[\iffootnote\mkbibparens\mkbibfootnote]
+\DeclareCiteCommand{\smartcite}[\iffootnote\mkfullwidthparens\mkbibfootnote]
   {\usebibmacro{cite:init}%
    \usebibmacro{prenote}}
   {\usebibmacro{citeindex}%
@@ -233,14 +258,11 @@
   {\usebibmacro{postnote}}
 
 
-\DeclareMultiCiteCommand{\parencites}[\mkbibparens]{\parencite}
-  {\setunit{\multicitedelim}}
-
-\DeclareMultiCiteCommand{\footcites}[\mkbibfootnote]{\footcite}
+\DeclareMultiCiteCommand{\parencites}[\mkfullwidthparens]{\parencite}
   {\setunit{\multicitedelim}}
 
 
-\DeclareMultiCiteCommand{\smartcites}[\iffootnote\mkbibparens\mkbibfootnote]
+\DeclareMultiCiteCommand{\smartcites}[\iffootnote\mkfullwidthparens\mkbibfootnote]
   {\smartcite}{\setunit{\multicitedelim}}
 
 

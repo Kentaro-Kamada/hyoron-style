@@ -104,6 +104,8 @@ biblio-title: "引用文献"
 
 ## 学位論文
 
+@ueno2013 はこう述べている[@ueno2013]。
+
 \fullcite{ueno2013}
 
 
