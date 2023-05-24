@@ -17,8 +17,6 @@ biblio-title: "引用文献"
 
 @Broadbent1998 はこう述べている[@Broadbent1998]。
 
-\fullcite{Broadbent1998}
-
 
 ## 共著の本
 
@@ -26,13 +24,11 @@ biblio-title: "引用文献"
 
 @Berger1972 はこう述べている[@Berger1972]。
 
-\fullcite{Berger1972}
 
 - 著者が3人以上
 
 @Isaac1980 はこう述べている[@Isaac1980]。
 
-\fullcite{Isaac1980}
 
 ## 編書
 
@@ -40,14 +36,12 @@ biblio-title: "引用文献"
 
 @Douglas1970 はこう述べている[@Douglas1970]。
 
-\fullcite{Douglas1970}
 
 
 - 編者が複数
 
 @Rubington1965 はこう述べている[@Rubington1965]。
 
-\fullcite{Rubington1965}
 
 
 
@@ -56,7 +50,6 @@ biblio-title: "引用文献"
 
 @Mayer1995 はこう述べている[@Mayer1995]。
 
-\fullcite{Mayer1995}
 
 
 ## 雑誌論文
@@ -64,7 +57,6 @@ biblio-title: "引用文献"
 
 @Abbott1995 はこう述べている[@Abbott1995]。
 
-\fullcite{Abbott1995}
 
 # 邦文の文献
 
@@ -72,26 +64,22 @@ biblio-title: "引用文献"
 
 @oguma1995 はこう述べている[@oguma1995]。
 
-\fullcite{oguma1995}
 
 ## 共著の本
 
 @miyajima1985 はこう述べている[@miyajima1985]。
 
-\fullcite{miyajima1985}
 
 ## 編書
 
 @kosaka1998 はこう述べている[@kosaka1998]。
 
-\fullcite{kosaka1998}
 
 
 ## 編書論文
 
 @Chuankyo1998 はこう述べている[@Chuankyo1998]。
 
-\fullcite{Chuankyo1998}
 
 
 
@@ -99,13 +87,10 @@ biblio-title: "引用文献"
 
 @sato1998 はこう述べている[@sato1998]。
 
-\fullcite{sato1998}
-
 
 ## 学位論文
 
 @ueno2013 はこう述べている[@ueno2013]。
 
-\fullcite{ueno2013}
 
 
