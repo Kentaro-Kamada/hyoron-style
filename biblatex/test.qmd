@@ -93,4 +93,10 @@ biblio-title: "引用文献"
 @ueno2013 はこう述べている[@ueno2013]。
 
 
+# 面倒なケース
+
+## 同一年度で同じ著者の論文が複数ある場合
+
+@Denning2022、@Denning2022a はこう述べている[@Denning2022; @Denning2022a]。
+
 
