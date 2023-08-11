@@ -499,26 +499,15 @@ useorigauthor=true,
   \usebibmacro{begentry}%
   % 著者名，公開年
   \usebibmacro{author+year}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
   % 論文表題
   \printfield{title}%
-  % アップロードサイト名
-  \ifthenelse{\boolean{japanese}}{%
-    % \newunit
-    \addjspace%
-    \iffieldundef{eprinttype}{}{\printfield{eprinttype}}%
-    \iflistundef{organization}{}{\printlist{organization}}%
-    \addjspace%
-  }{%
-  \newunit
-  \iffieldundef{eprinttype}{}{\printfield{eprinttype}}%
-  \iflistundef{organization}{}{\printlist{organization}}%
-  }%
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace}}{\setunit*{\addcomma\space}}
   % doi／閲覧日時
   \newunit
   \iffieldundef{doi}{}{%
     \renewcommand{\finentrypunct}{}%
     \printfield{doi}}%
-  \iffieldundef{url}{}{\usebibmacro{url+urldate}}%
   \usebibmacro{finentry}%
 }
 
