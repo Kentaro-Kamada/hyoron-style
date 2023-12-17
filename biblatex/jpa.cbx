@@ -122,7 +122,10 @@
 \DeclareNameAlias{translator}{labelname}
 \DeclareNameAlias{origauthor}{labelname}
 
-
+%% ページ数をつける際のフォーマットを変更
+\renewcommand*{\postnotedelim}{\addcolon\space}
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{multipostnote}{#1}
 
 \renewbibmacro*{textcite}{%
   % 同じ著者の引用が複数続く場合は区切り文字と出版年のみを表示
@@ -206,12 +209,7 @@
         \addspace}%
       \iffieldequalstr{relatedtype}{translationof}{%
         \entrydata*{\thefield{related}}{\printdateextra}%
-        \addspace}{}%
-      \ifnameundef{translator}{}{% 翻訳者
-        \printnames{translator}%
-        \iffieldundef{translatortype}{\printtext{訳}\space}%
-        {\printfield{translatortype}\space}%
-      }%
+        =}{}%
       \printlabeldateextra%
       }{%
       \iffieldundef{origyear}{}{\printorigdate\setunit*{\addslash}}%
