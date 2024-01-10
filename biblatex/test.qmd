@@ -109,6 +109,10 @@ biblio-title: "引用文献"
 @watanabe2023NipponNoKenkyu はこう述べている[@watanabe2023NipponNoKenkyu]。
 
 
+## ウェブサイト
+@kagakugijutsushinkokiko2023ResearchmapEYokoso ではこう言われている[@kagakugijutsushinkokiko2023ResearchmapEYokoso]。
+
+
 # 面倒なケース
 
 ## 同一年度で同じ著者の論文が複数ある場合
