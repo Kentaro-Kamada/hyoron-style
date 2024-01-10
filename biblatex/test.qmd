@@ -93,10 +93,25 @@ biblio-title: "引用文献"
 @ueno2013 はこう述べている[@ueno2013]。
 
 
+## 翻訳書
+@bourdieu1997HomoAkademikusu はこう述べている[@bourdieu1997HomoAkademikusu]。
+
+
+## 報告書
+### 科研費など（reportを使用）
+@nasu2010ChiNoKozo はこう述べている[@nasu2010ChiNoKozo]。
+
+### 政府刊行物など（miscを使用）
+@dokuritsugyoseihojinnippongakujutsushinkokai2011JimbunGakuShakai ではこのように触れられている[@dokuritsugyoseihojinnippongakujutsushinkokai2011JimbunGakuShakai]。
+
+
+## 学会発表
+@watanabe2023NipponNoKenkyu はこう述べている[@watanabe2023NipponNoKenkyu]。
+
+
 # 面倒なケース
 
 ## 同一年度で同じ著者の論文が複数ある場合
 
 @Denning2022、@Denning2022a はこう述べている[@Denning2022; @Denning2022a]。
-
 

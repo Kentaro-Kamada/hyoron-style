@@ -57,7 +57,7 @@ useorigauthor=true,
 
 % 複数の著者などの一番最後の著者の前の区切り文字
 \DeclareDelimFormat[bib,biblist]{finalnamedelim}{%
-  \ifthenelse{\boolean{japanese}}{・}{\addspace\&}
+  \ifthenelse{\boolean{japanese}}{・}{\addspace\printtext{and}}
 }
 
 
@@ -114,6 +114,34 @@ useorigauthor=true,
 \DeclareNameAlias{translator}{default}
 \DeclareNameAlias{translatora}{default}
 \DeclareNameAlias{origauthor}{default}
+
+\DeclareNameFormat{family-given}{%
+  \ifthenelse{\boolean{japanese}}{%
+    %日本語
+    \ifthenelse{\value{listcount}=1}{}{
+      \printtext{・}
+    }%
+    \namepartfamily%
+    \namepartgiven%
+  }{%
+    % 英語
+    % 2人目以降はgiven-family
+    \ifthenelse{\value{listcount}>1}{%
+      \usebibmacro{name:given-family}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
+      {\namepartsuffix}%
+    }{%
+      % 1人目はfamily-given
+      \usebibmacro{name:family-given}%
+      {\namepartfamily}%
+      {\namepartgiven}%
+      {\namepartprefix}%
+      {\namepartsuffix}%
+    }%
+  }%
+}
 
 % 英語のincollectionのeditorのみ、先頭編者もgiven-family
 \DeclareNameFormat[incollection]{editor}{
@@ -200,6 +228,7 @@ useorigauthor=true,
 \newbibmacro*{translatortype}{
   \ifthenelse{\boolean{japanese}}{%
     \iffieldundef{translatortype}{%
+      \unspace
       \printtext{訳}}{%
       \printfield{translatortype}%
     }%
@@ -214,6 +243,7 @@ useorigauthor=true,
 \newbibmacro*{translatoratype}{
   \ifthenelse{\boolean{japanese}}{%
     \iffieldundef{translatoratype}{%
+      \unspace
       \printtext{訳}}{%
       \printfield{translatoratype}%
     }%
@@ -240,14 +270,14 @@ useorigauthor=true,
 }%
 
 
-%%% 書籍タイトル %%%
-% 日本語は二重カギ括弧、英語はイタリック
-\DeclareFieldFormat[book,mvbook,online,inproceedings]{title}{% 
+%%% 書籍・報告書タイトル %%%
+% 日本語は二重カギ括弧、英語はイタリック（調査報告書にはreport、政府刊行物等にはmiscを使う）
+\DeclareFieldFormat[book,mvbook,report,misc]{title}{% 
   \ifthenelse{\boolean{japanese}}{『#1』}{\emph{#1}}}
 
-%%% 論文タイトル %%%
+%%% 論文、ウェブサイト、学会発表タイトル %%%
 % 日本語はカギ括弧、英語はダブルクオーテーション
-\DeclareFieldFormat[article,report,misc,inbook,incollection,thesis]{title}{
+\DeclareFieldFormat[article,inbook,incollection,thesis,online,inproceedings]{title}{
   \ifthenelse{\boolean{japanese}}{「#1」}{``#1\addcomma''}}
 
 
@@ -268,7 +298,7 @@ useorigauthor=true,
 
 %%% 大会発表論文集，Proceedings %%%
 \DeclareFieldFormat[inproceedings]{booktitle}{%
-  \ifthenelse{\boolean{japanese}}{『#1』}{%
+  \ifthenelse{\boolean{japanese}}{#1}{%
     \emph{#1}\addcomma%
   }%
 }%
@@ -292,16 +322,19 @@ useorigauthor=true,
 %%% URLと取得日 %%%
 \DeclareFieldFormat{url}{%
   \renewcommand*{\finentrypunct}{}%
-  from \url{#1}\nopunct%
+  \url{#1}\nopunct%
 }
-\DeclareFieldFormat{urldate}{Retrieved #1%
-  \ifthenelse{\boolean{japanese}}{}{\addcomma}%
+
+\DeclareFieldFormat{urldate}{%
+  \ifthenelse{\boolean{japanese}}{%
+    \thefield{urlyear}年\thefield{urlmonth}月\thefield{urlday}日取得\addcomma}{%
+    Retrieved #1\addcomma}%
 }
 % 表示マクロ
 \renewbibmacro*{url+urldate}{%
-  \iffieldundef{urlyear}
-    {}
-    {\printurldate\setunit*{\addnbspace}}\printfield{url}}
+  \iffieldundef{urlyear}{}{\nopunct\printurldate\setunit*{\addnbspace}}%
+  \printfield{url}%
+}
 
 
 
@@ -386,7 +419,7 @@ useorigauthor=true,
     \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
     \ifnameundef{editor}{
       \printdateextra
-      \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
+      \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}\space}}{\setunit*{\addcomma\space}}
     }{}
   }%
   % 編集者名
@@ -408,11 +441,11 @@ useorigauthor=true,
   \ifthenelse{\boolean{japanese}}{% 日本語文献
     \ifnameundef{origauthor}{}{%
       \renewcommand{\revsdnamepunct}{\addcomma\space}%
-      \printnames[family-given]{origauthor}\setunit{\addperiod\addspace}%
+      \printnames[family-given]{origauthor}\setunit{\addcomma\addspace}%
       \usebibmacro{date+extradate}\adddot\space%
       \printfield[emph]{origtitle}\setunit*{\adddot\space}%
       \printlist{origpublisher}\setunit*{\adddot\space}%
-      \printtext{\\(}%
+      \printtext{(}%
       \setboolean{japanese}{false}%
       \printnames{author}%
       \addspace\space\newunit%
@@ -432,10 +465,10 @@ useorigauthor=true,
   }{% 外国語文献
     % 原著者名
     \ifnameundef{author}{}{%
-      \usebibmacro{author+year}\setunit{\addperiod\addspace}}%
+      \usebibmacro{author+year}\setunit{\addcomma\addspace}}%
     % 原編集者名
     \ifnameundef{editor}{}{%
-      \usebibmacro{editor+year}\setunit{\addperiod\addspace}}%
+      \usebibmacro{editor+year}\setunit{\addcomma\addspace}}%
     % 表題
     \printfield{title}%
     \iffieldundef{subtitle}{}{%
@@ -456,6 +489,7 @@ useorigauthor=true,
 }%
 
 %%% 翻訳書（日本語訳の原著情報） %%%
+%% bibmacro{related}の中で↓が呼び出される
 \newbibmacro*{related:translationof}[1]{%
   \entrydata*{#1}{%
     \renewcommand*{\relatedpunct}{}%
@@ -478,21 +512,21 @@ useorigauthor=true,
   \setboolean{japanese}{false}%
   \renewcommand*{\revsdnamepunct}{\addcomma\space}%
   \usebibmacro{related}\setunit{\addperiod}%
-  \printtext{\\（}%
+  \printtext{（}%
   \setboolean{japanese}{true}%
-  \renewcommand{\revsdnamepunct}{}%
+  \renewcommand*{\revsdnamepunct}{}%
   \usebibmacro{translator}%
   \ifnameundef{translatora}{}{%
     \printnames{translatora}%
     \usebibmacro{translatoratype}%
   }%
-  \setunit*{\addcomma\addspace}%
-  \printdateextra\setunit*{\addcomma\addspace}%
+  \setunit*{\unspace\printtext{，}}%
+  \printdateextra\setunit*{\unspace\printtext{，}\addnbspace}%
   \printfield{title}%
   \iffieldundef{subtitle}{}{%
     \printfield{subtitle}%
   }%
-  \setunit*{\addjspace}%
+  \setunit*{\space}%
   \printlist{publisher}%
   \setunit*{\addperiod\space}%
   \printtext{）}%
@@ -505,7 +539,7 @@ useorigauthor=true,
   \usebibmacro{related:init}%
   \renewcommand*{\revsdnamepunct}{\addcomma\space}%
   \usebibmacro{related}\setunit{\addperiod\space}%
-  \printtext{\\(}%
+  \printtext{(}%
   \printnames[given-family]{translator}%
   \setunit{\addcomma\space}
   \usebibmacro{translatortype}%
@@ -604,7 +638,39 @@ useorigauthor=true,
   \usebibmacro{finentry}
 }
 
+%%% (3) 報告書
+%%科研費などの報告書にはreport（Zoteroでは「レポート」）を用いる
+\DeclareBibliographyDriver{report}{%
+  \usebibmacro{begentry}%
+  % 著者名，刊行年
+  \usebibmacro{author+year}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}\addspace}}{\setunit*{\addcomma\space}}
+  % 表題
+  \printfield{title}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace}}{\setunit*{\addspace}}
+  % 報告書タイプ（typeフィールド使用）
+  \iffieldundef{type}{}{\printfield{type}}%
+  % 課題番号（科研費のみ、numberフィールド使用）
+  \iffieldundef{number}{}{（\printfield{number}）}%
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}%
+  % 機関
+  \printlist{institution}
+  \usebibmacro{finentry}
+}
 
+%%報告書名のない政府刊行物などにはmisc（Zoteroでは「文書」）を用いる
+\DeclareBibliographyDriver{misc}{%
+  \usebibmacro{begentry}%
+  % 著者名，刊行年
+  \usebibmacro{author+year}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}\addspace}}{\setunit*{\addcomma\space}}
+  % 表題
+  \printfield{title}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace}}{\setunit*{\addspace}}
+  % 発行元
+  \printlist{organization}
+  \usebibmacro{finentry}
+}
 
 %%% (4) オンライン資料
 %% i) 刊行された冊子体がある → (3)- i), ii)の書式を使用
@@ -615,26 +681,30 @@ useorigauthor=true,
   \usebibmacro{begentry}%
   % 著者名，公開年
   \usebibmacro{author+year}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
   % 論文表題
   \printfield{title}%
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
   % アップロードサイト名
   \ifthenelse{\boolean{japanese}}{%
     % \newunit
     \addjspace%
     \iffieldundef{eprinttype}{}{\printfield{eprinttype}}%
     \iflistundef{organization}{}{\printlist{organization}}%
-    \addjspace%
+    \printtext{，}%
   }{%
-  \newunit
   \iffieldundef{eprinttype}{}{\printfield{eprinttype}}%
   \iflistundef{organization}{}{\printlist{organization}}%
+  \addcomma\space%
   }%
   % doi／閲覧日時
   \newunit
   \iffieldundef{doi}{}{%
     \renewcommand{\finentrypunct}{}%
     \printfield{doi}}%
-  \iffieldundef{url}{}{\usebibmacro{url+urldate}}%
+  \iffieldundef{url}{}{%
+    \ifthenelse{\boolean{japanese}}{（\usebibmacro{url+urldate}）}}{%
+      \printtext[parens]{\usebibmacro{url+urldate}}}
   \usebibmacro{finentry}%
 }
 
@@ -660,6 +730,7 @@ useorigauthor=true,
   \usebibmacro{begentry}%
   % 著者名，刊行年／発表年
   \usebibmacro{author+year}
+  \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
   % 表題
   \printfield{title}%
   % 誌名／大会名

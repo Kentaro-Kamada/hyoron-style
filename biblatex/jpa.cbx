@@ -58,9 +58,9 @@
     %
     % 著者名の区切り文字：「, 」
     \renewcommand*{\multinamedelim}{\addcomma\space}%
-    % 最後の著者名の表示前の区切り（共著者が2なら「&」，それ以外は「, &」
+    % 最後の著者名の表示前の区切り（共著者が2なら「and」，それ以外は「, and」
     \renewcommand*{\finalnamedelim}{%
-      \ifnum\value{liststop}>2\finalandcomma\fi\addspace\&\space}%
+      \ifnum\value{liststop}>2\finalandcomma\fi\addspace\printtext{and}\space}%
     % 3名以上の共著で著者名を省略する場合：「et al.」
     \renewcommand*{\andothersdelim}{\space{et al.}\space}%
   }%%
@@ -212,7 +212,7 @@
         =}{}%
       \printlabeldateextra%
       }{%
-      \iffieldundef{origyear}{}{\printorigdate\setunit*{\addslash}}%
+      \iffieldundef{origyear}{}{\printorigdate\setunit*{=}}%
       \iffieldequalstr{relatedtype}{translationof}{%
         \entrydata*{\thefield{related}}{\printlabeldateextra}%
         \setunit*{\addslash}%
