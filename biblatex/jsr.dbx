@@ -1,4 +1,4 @@
-\ProvidesFile{jpa.dbx}[2022/06/22\space v9.16\space APA biblatex style data model]
+\ProvidesFile{jsr.dbx}[2024/02/03\space v0.01\space 社会学評論スタイルガイド第3版]
 \DeclareDatamodelFields[type=list, datatype=name, label=true]{origauthor}
 \DeclareDatamodelEntryfields{origauthor}
 \DeclareDatamodelFields[type=list, datatype=name, label=true]{translatora}
