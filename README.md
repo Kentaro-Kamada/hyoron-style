@@ -20,7 +20,7 @@ quartoの場合、yamlの`cite-method`と`biblatexoptions`を以下のように�
 
 ```{yaml}
 cite-method: biblatex
-biblatexoptions: [backend=biber, style=jpa, sorting=nyt]
+biblatexoptions: [backend=biber, style=jsr, sorting=nyt]
 ```
 
 ## 付記
