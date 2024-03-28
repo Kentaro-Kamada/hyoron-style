@@ -635,6 +635,12 @@ useorigauthor=true,
   \usebibmacro{volume+issues}
   % ページ
   \printfield{pages}
+  \newunit
+  % DOI
+  \iffieldundef{doi}{}{%
+    \renewcommand{\finentrypunct}{}%
+    \printfield{doi}
+  }%
   \usebibmacro{finentry}
 }
 
