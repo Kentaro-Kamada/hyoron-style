@@ -327,13 +327,20 @@ useorigauthor=true,
 
 \DeclareFieldFormat{urldate}{%
   \ifthenelse{\boolean{japanese}}{%
-    \thefield{urlyear}年\thefield{urlmonth}月\thefield{urlday}日取得\addcomma}{%
-    Retrieved #1\addcomma}%
+    \thefield{urlyear}年\thefield{urlmonth}月\thefield{urlday}日取得\addcomma
+  }{%
+    Retrieved #1\addcomma
+  }%
 }
 % 表示マクロ
 \renewbibmacro*{url+urldate}{%
-  \iffieldundef{urlyear}{}{\nopunct\printurldate\setunit*{\addnbspace}}%
-  \printfield{url}%
+  \iffieldundef{doi}{
+    \iffieldundef{urlyear}{}{\nopunct\printurldate\setunit*{\addnbspace}}%
+    \printfield{url}%
+  }{
+    \iffieldundef{urlyear}{}{\nopunct\printurldate\setunit*{\addnbspace}}%
+    \printfield{doi}%
+  }
 }
 
 
@@ -631,16 +638,22 @@ useorigauthor=true,
   % 誌名
   \printfield{journaltitle}
   \ifthenelse{\boolean{japanese}}{\setunit*{\unspace}}{\setunit*{\addcomma\space}}
-  % 巻号
-  \usebibmacro{volume+issues}
-  % ページ
-  \printfield{pages}
-  \newunit
-  % DOI
-  \iffieldundef{doi}{}{%
-    \renewcommand{\finentrypunct}{}%
-    \printfield{doi}
-  }%
+  % ページ数なし＝オンラインジャーナル（DOI付与）
+  \iffieldundef{pages}{
+    % 巻号
+    \usebibmacro{volume+issues}
+    \setunit*{\addcomma\space}
+    \ifthenelse{\boolean{japanese}}{
+      （\usebibmacro{url+urldate}）
+    }{%
+      \printtext[parens]{\usebibmacro{url+urldate}}
+    }
+  }{
+    % 巻号
+    \usebibmacro{volume+issues}
+    % ページ数
+    \printfield{pages}
+  }
   \usebibmacro{finentry}
 }
 
