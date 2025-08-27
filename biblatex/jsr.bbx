@@ -23,6 +23,7 @@ sorting=nyt,%
 urldate=long,%
 dateabbrev=false,%
 useorigauthor=true,
+dashed=true,%
 %uniquelist=minyear,%
 %uniquename=true,%
 %uniqueprimaryauthor=true,%%
@@ -183,7 +184,13 @@ useorigauthor=true,
 
 %%% 著者名+出版年 %%%
 \newbibmacro{author+year}{%
-  \printnames{author}
+  \iffieldequals{namehash}{\bbx@lasthash}
+    {\ifthenelse{\boolean{japanese}}
+       {\printtext{————}}% Japanese full-width quadruple dash
+       {\printtext{----}}% English quadruple dash  
+    }
+    {\printnames{author}}%
+  \savefield{namehash}{\bbx@lasthash}%
   \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
   \printdateextra
 }
@@ -219,7 +226,13 @@ useorigauthor=true,
 
 %%% 編集者名+出版年 %%%
 \newbibmacro{editor+year}{%
-  \usebibmacro{editor}
+  \iffieldequals{namehash}{\bbx@lasthash}
+    {\ifthenelse{\boolean{japanese}}
+       {\printtext{————}}% Japanese full-width quadruple dash
+       {\printtext{----}}% English quadruple dash  
+    }
+    {\usebibmacro{editor}}%
+  \savefield{namehash}{\bbx@lasthash}%
   \printdateextra
 }
 
