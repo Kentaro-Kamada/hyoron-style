@@ -187,7 +187,7 @@ dashed=true,%
   \iffieldequals{namehash}{\bbx@lasthash}
     {\ifthenelse{\boolean{japanese}}
        {\printtext{————}}% Japanese full-width quadruple dash
-       {\printtext{----}}% English quadruple dash  
+       {\printtext{\textemdash\textemdash\textemdash\textemdash}}% English quadruple em-dash  
     }
     {\printnames{author}}%
   \savefield{namehash}{\bbx@lasthash}%
@@ -226,13 +226,7 @@ dashed=true,%
 
 %%% 編集者名+出版年 %%%
 \newbibmacro{editor+year}{%
-  \iffieldequals{namehash}{\bbx@lasthash}
-    {\ifthenelse{\boolean{japanese}}
-       {\printtext{————}}% Japanese full-width quadruple dash
-       {\printtext{----}}% English quadruple dash  
-    }
-    {\usebibmacro{editor}}%
-  \savefield{namehash}{\bbx@lasthash}%
+  \usebibmacro{editor}%
   \printdateextra
 }
 
