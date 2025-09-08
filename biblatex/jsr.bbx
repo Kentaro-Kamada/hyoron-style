@@ -183,13 +183,13 @@ dashed=true,%
 
 
 %%% 著者名+出版年 %%%
-\newbibmacro{author+year}{%
-  \iffieldequals{namehash}{\bbx@lasthash}
-    {\ifthenelse{\boolean{japanese}}
-       {\printtext{————}}% Japanese full-width quadruple dash
-       {\printtext{\textemdash\textemdash\textemdash\textemdash}}% English quadruple em-dash  
-    }
-    {\printnames{author}}%
+\newbibmacro{author+year}{
+  % 著者名のハッシュ値が前の文献と同じ場合、4倍ダッシュを表示
+  \iffieldequals{namehash}{\bbx@lasthash}{
+    \printtext{\textemdash\textemdash\textemdash\textemdash}
+  }{
+    \printnames{author}
+  }%
   \savefield{namehash}{\bbx@lasthash}%
   \ifthenelse{\boolean{japanese}}{\setunit*{\unspace\printtext{，}}}{\setunit*{\addcomma\space}}
   \printdateextra
