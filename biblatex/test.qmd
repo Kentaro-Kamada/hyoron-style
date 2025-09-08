@@ -115,9 +115,15 @@ biblio-title: "引用文献"
 
 ## オンラインのみのジャーナル（articleでページ欄を空欄にしておく）
 
-@Lundberg2022a ではこう言われている[@Lundberg2022a]。
+@Fujihara2024 ではこう言われている[@Fujihara2024]。
 
 # 面倒なケース
+
+## 同一著者が続く場合（4倍ダッシュ）
+
+@sato1998 と @sato2016 はこう述べている[@sato1998; @sato2016]。
+
+また、@Fujihara2016 と @Fujihara2024 はこう述べている[@Fujihara2016; @Fujihara2024]。
 
 ## 同一年度で同じ著者の論文が複数ある場合
 
