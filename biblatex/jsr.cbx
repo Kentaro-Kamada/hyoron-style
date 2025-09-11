@@ -3,8 +3,8 @@
 \RequireCitationStyle{authoryear-comp}
 
 
-% et alが重複して表示されないようにする
-\DefineBibliographyStrings{english}{andothers={}}
+% 「et al.」の表示を制御
+% English citations will use the standard "et al." with custom formatting
 
 % 著者名と出版年の区切りは半角スペース
 \DeclareDelimFormat{nameyeardelim}{\space}
@@ -61,8 +61,8 @@
     % 最後の著者名の表示前の区切り（共著者が2なら「and」，それ以外は「, and」
     \renewcommand*{\finalnamedelim}{%
       \ifnum\value{liststop}>2\finalandcomma\fi\addspace\printtext{and}\space}%
-    % 3名以上の共著で著者名を省略する場合：「et al.」
-    \renewcommand*{\andothersdelim}{\space{et al.}}%
+    % 3名以上の共著で著者名を省略する場合の区切り
+    \renewcommand*{\andothersdelim}{\space}%
   }%%
 }
 
