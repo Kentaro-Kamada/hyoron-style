@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[backend=biber, style=jsr, sorting=nyt]{biblatex}
+\addbibresource{reference.bib}
+
+\begin{document}
+
+Testing citations with multiple authors:
+
+Single citation: \cite{Denning2022}
+
+Single citation: \cite{Denning2022a}
+
+Multiple citations: \cite{Denning2022, Denning2022a}
+
+\printbibliography
+
+\end{document}
